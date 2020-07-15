@@ -13,3 +13,4 @@ This Repository is about how to auto  Resizing cell with UITableviewcell, UIColl
 
 -Vertical spacing to bottom layout guide
  This time though bottom layout guide is the actual bottom of the view controller, since there is no need to leave the space hence this constraint means space between bottom boundary of your view to the bottom boundary of view controller.
+
