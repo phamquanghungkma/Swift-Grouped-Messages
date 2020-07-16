@@ -17,6 +17,7 @@ class ChatMessageCell: UITableViewCell {
     var leadingConstraint: NSLayoutConstraint!
     var trailConstraint: NSLayoutConstraint!
     
+    
     var chatMessage: ChatMessage! {
         didSet{
             bubblebackgroundView.backgroundColor = chatMessage.isIncoming ? .white: .darkGray
@@ -30,8 +31,6 @@ class ChatMessageCell: UITableViewCell {
                 leadingConstraint.isActive = false
                 trailConstraint.isActive = true
             }
-            
-            
         }
         
     }
@@ -48,10 +47,7 @@ class ChatMessageCell: UITableViewCell {
         bubblebackgroundView.backgroundColor = .yellow
         addSubview(bubblebackgroundView)
         
-        
-        
         addSubview(messageLabel)
-        messageLabel.text = "“It’s about” is a way to highlight the importance of something. For example, “It’s about doing a good job” means what’s important is to do a good job."
         messageLabel.numberOfLines = 0
         
         
@@ -66,18 +62,18 @@ class ChatMessageCell: UITableViewCell {
                bubblebackgroundView.trailingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 16),
                bubblebackgroundView.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 16)
             
-        
             ])
          leadingConstraint =  messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 32)
-        leadingConstraint.isActive = false
+         leadingConstraint.isActive = false
         
          trailConstraint = messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32)
-        trailConstraint.isActive = true
+         trailConstraint.isActive = true
 
         
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
        
     }
+    
    
     
     required init?(coder: NSCoder) {
