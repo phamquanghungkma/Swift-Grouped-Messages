@@ -53,7 +53,7 @@ class ChatMessageCell: UITableViewCell {
         
         // lets set up some constraints for our label
         NSLayoutConstraint.activate([
-               messageLabel.topAnchor.constraint(equalTo: topAnchor,constant: 32),
+               messageLabel.topAnchor.constraint(equalTo: topAnchor,constant: 16),
                messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -32),
                messageLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
                

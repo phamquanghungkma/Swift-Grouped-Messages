@@ -49,20 +49,40 @@ class ViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return chatMessages.count
     }
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//
+//
+//
+//
+//        return "Section: \(Date())"
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+         if let firstMessageInSection = chatMessages[section].first{
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MM/dd/yyyy"
+                    let dateString = dateFormatter.string(from: firstMessageInSection.date)
+                    print("section :\(chatMessages[section].first)!")
+                      let label = DateHeaderLabel()
+                        label.text = dateString
+                         let containerView = UIView()
+
+                       
+                         containerView.addSubview(label)
+
+                         label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+                         label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+                         return  containerView
         
-        if let firstMessageInSection = chatMessages[section].first{
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            let dateString = dateFormatter.string(from: firstMessageInSection.date)
-            
-            return dateString }
-        
-        return "Section: \(Date())"
+                }
+            return nil
+     
     }
     
-    
-    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -70,6 +90,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatMessageCell
 
 //        let chatMessage = chatMessages[indexPath.row]
@@ -78,6 +99,34 @@ class ViewController: UITableViewController {
         cell.chatMessage = chatMessage
         return cell
     }
+    
+    class DateHeaderLabel:UILabel{
+        
+       override init(frame: CGRect) {
+            super.init(frame: frame)
+        
+           backgroundColor = .black
+           textColor  = .white
+            textAlignment = .center
+            translatesAutoresizingMaskIntoConstraints = false
+            font = UIFont.boldSystemFont(ofSize: 14)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        override var intrinsicContentSize: CGSize{
+            let originalContentSize = super.intrinsicContentSize
+            let height = originalContentSize.height + 12
+            layer.cornerRadius = height / 2
+            layer.masksToBounds = true
+            
+            return CGSize(width: originalContentSize.width + 16, height: height )
+        }
+    }
 
 }
+
+
 
