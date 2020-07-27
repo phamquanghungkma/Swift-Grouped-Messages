@@ -34,6 +34,7 @@ class ViewController: UITableViewController {
 //        ]
 //
 //    ]
+    var chatMessages = [[ChatMessage]]()
     let messagesFromServer = [
         ChatMessage(text: "Here's my very first message", isIncoming: true,date: Date.dateFromCustomString(customString: "08/03/2018")),
         ChatMessage(text: "I'm going to message another long message that will word wrap", isIncoming: false,date:  Date.dateFromCustomString(customString: "08/03/2018")),
@@ -43,31 +44,30 @@ class ViewController: UITableViewController {
         ChatMessage(text: "How's it going ", isIncoming: true,date:Date.dateFromCustomString(customString: "09/16/2018")),
                ChatMessage(text: "Yeah! Everything's ok", isIncoming: false,date:Date.dateFromCustomString(customString: "09/16/2018")),
         ChatMessage(text: "Hello! my guy ", isIncoming: false,date:Date.dateFromCustomString(customString: "08/26/2018")),
-        ChatMessage(text: "What's up man?", isIncoming: true,date:Date.dateFromCustomString(customString: "08/26/2018"))
+        ChatMessage(text: "What's up man?", isIncoming: true,date:Date.dateFromCustomString(customString: "08/26/2018")),
+        ChatMessage(text: "What's up girl?", isIncoming: true,date:Date.dateFromCustomString(customString: "08/03/2018")),
+
+        
         
 
     ]
     fileprivate func attempToAssembleGroupedMessages(){
-        print("Attemp to group our messages together")
-        
-        let groupedMessages =   Dictionary(grouping: messagesFromServer) { (element) ->  Date in
+        let groupedMessages = Dictionary(grouping: messagesFromServer) { (element) ->  Date in
             return element.date
         }
-        // provide a sorting for your keys somehow
-        let sortedKeys = groupedMessages.keys.sorted();
-        sortedKeys.forEach { (key) in
+        
+        // groupMessages la 1 dictionary(key la date : values la gia tri )
+        // provide a sorting for your keys somehow,
+        let sortedKeys = groupedMessages.keys.sorted() // lay ra keys cua mang dictionary va sap xep cua groupMessages
+        print("sortedKeys : \(sortedKeys)")
+        
+            sortedKeys.forEach { (key) in
             let values = groupedMessages[key]
             chatMessages.append(values ?? [] )
-            
+                print("add \(chatMessages)")
         }
-
     }
      
-    
-    var chatMessages = [[ChatMessage]]()
-    
-   
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,7 +88,6 @@ class ViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return chatMessages.count
     }
-
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
